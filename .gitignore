@@ -9,7 +9,7 @@
 
 # dependencies
 /node_modules
-covid-fronted-prod/node_modules/
+/covid-frontend-prod/node_modules/
 
 # profiling files
 chrome-profiler-events*.json
