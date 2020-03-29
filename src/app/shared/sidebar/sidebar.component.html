@@ -1,0 +1,38 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary">
+    <!-- Brand Logo -->
+    <a routerLink="/global" class="brand-link text-center">
+        <span class="brand-text font-bold-light">Países infectados</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar ">
+    <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <div class="">
+                <!-- /.card-header -->
+                <div class="">
+                <table class="row-border" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>País</th>
+                        <th>Casos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let country of countriesRanking; index as i" style="cursor: pointer;" (click)="getCountry(country.country_name)">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ country.country_name }}</td>
+                            <td>{{ country.cases }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

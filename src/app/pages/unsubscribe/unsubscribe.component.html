@@ -1,0 +1,8 @@
+<div *ngIf="correct" class="mt-5 jumbotron">
+    <h1 class="display-4">Hola, parece que decidiste dejar de recibir reportes</h1>
+    <p class="lead">Puedes seguir visitando nuestra página para consultar en tiempo real los últimos reportes sobre el COVID-19 que suceden alrededor del mundo.</p>
+</div>
+<div *ngIf="!correct" class="mt-5 jumbotron">
+    <h1 class="display-4">Algo salió mal</h1>
+    <p class="lead">Parece que la url no es correcta, verifica y recarga la página o revisa tu correo electrónico.</p>
+</div>

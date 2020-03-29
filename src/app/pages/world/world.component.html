@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h1 class="pt-3 text-dark">Situación actual en el mundo</h1>
+    </div>
+</div>
+<!-- Small boxes (Stat box) -->
+<div class="row">
+    <div class="col">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ totalCases.total_cases }}</h3>
+                <p>Total de casos</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-bug"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ totalCases.total_recovered }}</h3>
+                <p>Recuperados {{ totalCases.recovered }}%</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col">
+        <!-- small box -->
+        <div class="small-box bg-secondary">
+            <div class="inner">
+                <h3>{{ totalCases.total_deaths }}</h3>
+                <p>Difuntos {{ totalCases.deaths}}%</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-skull"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h1 class="pt-3 text-dark">Últimos casos</h1>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-4" *ngFor="let case of latestCases;">
+        <div class="info-box" (click) = "seeInfoCountry(case.country_name)" style="cursor: pointer;">
+            <img src="https://www.countryflags.io/{{ flag[case.country_name] }}/flat/64.png">
+
+            <div class="info-box-content">
+                <span class="info-box-text">{{case.country_name}}</span>
+                <span class="info-box-number">{{case.new_cases}} casos más</span>
+                <span class="info-box-text">Total: {{ case.total_cases }}</span>
+                <span class="info-box-text">{{ case.date }}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+      <!-- /.info-box -->
+    </div>
+</div>
