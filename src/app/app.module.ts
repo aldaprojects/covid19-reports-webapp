@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { WorldComponent } from './pages/world/world.component';
 import { CountryComponent } from './pages/country/country.component';
 import { UnsubscribeComponent } from './pages/unsubscribe/unsubscribe.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 const config: SocketIoConfig = {
   url: environment.wsUrl, options: {}
 };
@@ -31,7 +32,8 @@ const config: SocketIoConfig = {
     PagesComponent,
     WorldComponent,
     CountryComponent,
-    UnsubscribeComponent
+    UnsubscribeComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,
