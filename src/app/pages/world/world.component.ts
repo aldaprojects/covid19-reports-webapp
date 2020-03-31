@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CovidService } from '../../services/covid.service';
 import { WebsocketService } from '../../services/websocket.service';
-import { map, filter } from 'rxjs/operators';
-import { ChartType } from 'chart.js';
-import { MultiDataSet, Label } from 'ng2-charts';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-world',
@@ -234,28 +232,17 @@ export class WorldComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    // http
     this.csService.loadingTotalCases()
     .subscribe( (data: any) => {
       if ( data.ok ) {
-        this.totalCases = data.global;
-        this.totalCases.recovered = (this.totalCases.total_recovered * 100 / this.totalCases.total_cases).toFixed(2);
-        this.totalCases.deaths = (this.totalCases.total_deaths * 100 / this.totalCases.total_cases).toFixed(2);
+        this.updateTotalCases(data.global);
       }
     });
-    this.wsService.listen('globalCases')
-    .subscribe( (data: any) => {
-      this.totalCases = data;
-      this.totalCases.recovered = (this.totalCases.total_recovered * 100 / this.totalCases.total_cases).toFixed(2);
-      this.totalCases.deaths = (this.totalCases.total_deaths * 100 / this.totalCases.total_cases).toFixed(2);
-    });
-
     this.csService.loadingLatestCases()
     .pipe( filter( (data: any) => {
-        const cases = data.cases;
-        // tslint:disable-next-line: prefer-for-of
-        for ( let i = 0; i < cases.length; i++ ) {
-          cases[i].date = new Date(cases[i].date).toLocaleString();
-        }
+        this.transformDate(data.cases);
         return true;
     }))
     .subscribe( (data: any) => {
@@ -263,15 +250,17 @@ export class WorldComponent implements OnInit {
         this.latestCases = data.cases;
       }
     });
+
+    // sockets
+    this.wsService.listen('globalCases')
+    .subscribe( (data: any) => {
+      this.updateTotalCases(data);
+    });
     this.wsService.listen('latestCases')
     .pipe( filter( (data: any) => {
-      const cases = data;
-      // tslint:disable-next-line: prefer-for-of
-      for ( let i = 0; i < cases.length; i++ ) {
-        cases[i].date = new Date(cases[i].date).toLocaleString();
-      }
+      this.transformDate(data);
       return true;
-  }))
+    }))
     .subscribe( (data: any) => {
       this.latestCases = data;
     });
@@ -279,6 +268,20 @@ export class WorldComponent implements OnInit {
 
   seeInfoCountry( country: string ) {
     this.router.navigate([`/country/${country}`]);
+  }
+
+  transformDate( data: any ) {
+    const cases = data;
+    // tslint:disable-next-line: prefer-for-of
+    for ( let i = 0; i < cases.length; i++ ) {
+      cases[i].date = new Date(cases[i].date).toLocaleString();
+    }
+  }
+
+  updateTotalCases( data: any ) {
+    this.totalCases = data;
+    this.totalCases.recovered = (this.totalCases.total_recovered * 100 / this.totalCases.total_cases).toFixed(2);
+    this.totalCases.deaths = (this.totalCases.total_deaths * 100 / this.totalCases.total_cases).toFixed(2);
   }
 
 }

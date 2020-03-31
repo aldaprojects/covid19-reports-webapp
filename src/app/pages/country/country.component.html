@@ -44,40 +44,64 @@
         <h1 class="pt-3 text-dark">Curva epidemiológica</h1>
         <span class="badge badge-light">{{fCases.cases}} posibles casos para la noche del {{fCases.date}}</span>
     </div>
+    <div class="col-sm-6 mt-3 mb-4">
+        <label for="countriesSelect">Comparar con otros países</label>
+        <span class="badge badge-light">(si usa pc -> click + escribir nombre para buscar un país)</span>
+        <select (change)="compare($event.target.options[$event.target.selectedIndex].label)" id="countriesSelect" class="form-control" >
+          <option >Seleccionar país</option>
+          <option *ngFor="let country of countries; index as i" value="country.country_name">{{ country.country_name }}</option>
+        </select>
+    </div>
 </div>
 <!-- /.row -->
-<div class="row">
-    <div class="col-md-6">
-        <canvas baseChart style="display: block;"
-                    [datasets]="lineChartData"
-                    [options]="lineChartOptions"
-                    [labels]="lineChartLabels"
-                    [colors]="lineChartColors"
-                    [legend]="true"
-                    [chartType]="'line'"></canvas>
-        </div>
-        <div class="col-md-6">
-            <label for="countriesSelect">Comparar con otros países</label>
-            <span class="badge badge-light">(si usa pc -> click + escribir nombre para buscar un país)</span>
-            <select (change)="compare($event.target.options[$event.target.selectedIndex].label)" id="countriesSelect" class="form-control" >
-              <option >Seleccionar país</option>
-              <option *ngFor="let country of countries; index as i" value="country.country_name">{{ country.country_name }}</option>
-            </select>
 
-          <div class="alert mt-2" role="alert" style="background-color: #fff3cd;">
-            <h4 class="alert-heading">¿Quieres recibir información en tiempo real sobre este país?</h4>
-            <p>Introduce tu correo electrónico y te estaremos informando cuando aparezca un nuevo reporte. Todo en tiempo real.</p>
-            <hr>
-            <form #f="ngForm" (ngSubmit)="subscription(f)" class="input-group" ngNativeValidate id="emailCampo">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                      </div>
-                    <input  name="email" ngModel type="email" class="form-control" placeholder="correo electrónico" required>
-                    <div class="input-group-append">
-                      <input class="btn btn-secondary" type="button" type="submit" value="Aceptar">
-                    </div>
+<div class="">
+    <canvas baseChart
+    [datasets]="lineChartDataLine"
+    [options]="lineChartOptions"
+    [labels]="lineChartLabelsLine"
+    [colors]="lineChartColors"
+    [legend]="true"
+    [chartType]="'line'">
+    </canvas>
+</div>
+
+
+<div class="col-sm-6">
+    <h1 class="pt-3 text-dark">Casos por día</h1>
+</div>
+
+<div class="">
+    <canvas baseChart
+    [datasets]="lineChartDataBar"
+    [options]="lineChartOptions"
+    [labels]="lineChartLabelsBar"
+    [colors]="lineChartColors[2]"
+    [legend]="true"
+    [chartType]="'bar'">
+    </canvas>
+</div>
+
+
+
+
+<div class="col-md-12">
+  <div class="alert mt-2" role="alert">
+    <h4 class="alert-heading">¿Quieres recibir información en tiempo real sobre este país?</h4>
+
+    <p>Introduce tu correo electrónico y te estaremos informando cuando aparezca un nuevo reporte. Todo en tiempo real.</p>
+
+    <hr>
+    <form #f="ngForm" (ngSubmit)="subscription(f)" class="input-group" ngNativeValidate id="emailCampo">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-            </form>
-    </div>
+            <input  name="email" ngModel type="email" class="form-control" placeholder="correo electrónico" required>
+            <div class="input-group-append">
+                <input class="btn btn-secondary" type="button" type="submit" value="Aceptar">
+            </div>
+        </div>
+    </form>
+  </div>
 </div>

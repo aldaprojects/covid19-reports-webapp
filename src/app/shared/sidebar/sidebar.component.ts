@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       ordering: true,
       info: false,
       language: {
-          searchPlaceholder: 'Buscar',
+          searchPlaceholder: 'Buscar país',
           search: '',
           zeroRecords : 'No se encontró un país con ese nombre'
       }
@@ -59,9 +59,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       (data: any) => {
         this.countriesRanking = data;
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          // Destroy the table first
           dtInstance.destroy();
-          // Call the dtTrigger to rerender again
           this.dtTrigger.next();
         });
       }
