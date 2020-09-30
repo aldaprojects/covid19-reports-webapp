@@ -1,7 +1,6 @@
-# Coronavirus en tiempo real
+### Angular APP 
 
-
-Es una página que funciona en tiempo real, mostrando los últimos casos, comparación entre dos paíes, una predicción de los casos en los próximos 4 días y más...
+Angular APP to monitor COVID19 situation.
 
 ![Imagen 1](./src/assets/img/ss1.jpg)
 ![Imagen 2](./src/assets/img/ss2.jpg)
