@@ -23,7 +23,7 @@
     "chart.js": "^2.9.3",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-socket-io": "^0.2.4",
     "ng2-charts": "^2.3.0",
     "ngx-socket-io": "^3.0.1",
